@@ -1,0 +1,59 @@
+<div class="card mt-3">
+    <div class="card-body">
+
+
+       <div>
+            <h5>Consulta de contas</h5>
+            <p>Listagem de contas a pagar e a receber.</p>
+       </div>
+
+
+       <div *ngIf="mensagem" class="alert alert-primary">
+            <strong>{{mensagem}}</strong>
+       </div>
+
+
+       <div class="table-responsive">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Nome da conta</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Tipo</th>
+                        <th>Categoria</th>
+                        <th>Operações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of contas">
+                        <td>{{ c.nome | uppercase }}</td>
+                        <td>{{ c.data | date : 'dd/MM/yyyy' }}</td>
+                        <td>{{ c.preco | currency : 'R$ ' }}</td>
+                        <td>{{ c.tipo }}</td>
+                        <td>{{ c.categoria.nome | uppercase }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary me-2"
+                                [routerLink]="['/pages/editar-contas', c.id]">
+                                Editar
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger"
+                                (click)="onDelete(c.id)">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            Quantidade de registros: {{ contas.length }}
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+       </div>
+
+
+    </div>
+</div>

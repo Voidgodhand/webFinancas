@@ -1,0 +1,74 @@
+<div class="card mt-3">
+    <div class="card-body">
+
+
+        <div>
+            <h5>Cadastro de contas a pagar e receber</h5>
+            <p>Preencha os campos para incluir suas contas.</p>
+        </div>
+
+
+        <div *ngIf="mensagem" class="alert alert-primary mb-3">
+            <strong>{{mensagem}}</strong>
+        </div>
+
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label>Nome da conta:</label>
+                    <input type="text" class="form-control" formControlName="nome" />
+                    <div class="text-danger" *ngIf="f['nome'].touched && f['nome'].invalid">
+                        Por favor, informe o nome da conta com pelo menos 8 caracteres.
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Data da conta:</label>
+                    <input type="date" class="form-control" formControlName="data"/>
+                    <div class="text-danger" *ngIf="f['data'].touched && f['data'].invalid">
+                        Por favor, informe a data da conta.
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Valor da conta:</label>
+                    <input type="text" class="form-control" formControlName="preco"/>
+                    <div class="text-danger" *ngIf="f['preco'].touched && f['preco'].invalid">
+                        Por favor, informe o valor da conta.
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label>Tipo da conta:</label>
+                    <select class="form-select" formControlName="tipo">
+                        <option value="">Escolha uma opção</option>
+                        <option value="RECEBER">Conta a receber</option>
+                        <option value="PAGAR">Conta a pagar</option>
+                    </select>
+                    <div class="text-danger" *ngIf="f['tipo'].touched && f['tipo'].invalid">
+                        Por favor, informe o tipo da conta.
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>Categoria da conta:</label>
+                    <select class="form-select" formControlName="categoriaId">
+                        <option value="">Escolha uma opção</option>
+                        <option *ngFor="let c of categorias" value="{{c.id}}">
+                            {{c.nome | uppercase}}
+                        </option>
+                    </select>
+                    <div class="text-danger" *ngIf="f['categoriaId'].touched && f['categoriaId'].invalid">
+                        Por favor, selecione a categoria da conta.
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <input type="submit" class="btn btn-success" value="Realizar Cadastro"/>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+</div>

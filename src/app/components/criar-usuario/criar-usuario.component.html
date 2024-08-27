@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h3>Criação de conta de usuário</h3>
+                    <p>Preencha os campos para criar a sua conta.</p>
+                </div>
+
+                <div class="text-success text-center">
+                    <strong>{{mensagemSucesso}}</strong>
+                </div>
+
+                <div class="text-danger text-center">
+                    <strong>{{mensagemErro}}</strong>
+                </div>
+
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                    <div class="mb-3">
+                        <label>Nome do usuário:</label>
+                        <input type="text" class="form-control" formControlName="nome"/>
+                        <div class="text-danger" *ngIf="f['nome'].touched && f['nome'].invalid">
+                            Por favor, informe o nome do usuário com pelo menos 8 caracteres.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email de acesso:</label>
+                        <input type="text" class="form-control" formControlName="email"/>
+                        <div class="text-danger" *ngIf="f['email'].touched && f['email'].invalid">
+                            Por favor, informe um endereço de email válido.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Senha de acesso:</label>
+                        <input type="password" class="form-control" formControlName="senha"/>
+                        <div class="text-danger" *ngIf="f['senha'].touched && f['senha'].invalid">
+                            Por favor, informe a senha com letras maiúsculas, minúsculas, 
+                            números, símbolos e pelo menos 8 caracteres.
+                        </div>
+                    </div>
+
+                    <div class="mb-3 d-grid">
+                        <input type="submit" class="btn btn-success"
+                            value="Realizar Cadastro"
+                            [disabled]="form.invalid"/>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
